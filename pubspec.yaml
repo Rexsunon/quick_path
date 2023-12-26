@@ -37,9 +37,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_hooks: ^0.20.3
   freezed_annotation: ^2.4.1
+  gap: ^3.0.1
   hooks_riverpod: ^2.4.9
   json_annotation: ^4.8.1
   riverpod_annotation: ^2.3.3
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +57,7 @@ dev_dependencies:
   build_runner: ^2.4.7
   custom_lint: ^0.5.7
   freezed: ^2.4.6
+#  flutter_gen_runner: ^5.3.2
   flutter_lints: ^2.0.0
   json_serializable: ^6.7.1
   riverpod_generator: ^2.3.9
@@ -70,9 +75,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
+    - assets/ndjsons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -99,3 +104,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  # Enable generation of localized Strings from arb files.
+  generate: true
+
+#flutter_gen:
+#  output: lib/src/common/constants/gen/

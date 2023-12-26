@@ -1,0 +1,6 @@
+{
+  "appName": "QuickPath",
+  "@appName": {
+    "description": "App name"
+  }
+}
