@@ -1,6 +1,7 @@
 {
-  "appName": "QuickPath",
-  "@appName": {
-    "description": "App name"
-  }
+  "appTitle": "QuickPath",
+  "@appTitle": {
+    "description": "The title of the app"
+  },
+  "drawPath": "Draw path"
 }

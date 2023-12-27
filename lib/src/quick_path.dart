@@ -15,7 +15,6 @@ class _QuickPathState extends State<QuickPath> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: context.l10n!.appName,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -26,6 +25,7 @@ class _QuickPathState extends State<QuickPath> {
         Locale('en'), // English
         Locale('fr'), // French
       ],
+      onGenerateTitle: (context) => context.l10n!.appTitle,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
