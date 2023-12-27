@@ -9,11 +9,10 @@ Future<List<DoodlingModel>> loadDoodlingFromNdjson(String filePath) async {
     String assetContent = await rootBundle.loadString(filePath);
 
     // Parse the JSON content
-    final List<dynamic> jsonList = LineSplitter.split(assetContent)
-        .map((line) => json.decode(line))
-        .toList();
-
-    List<DoodlingModel> doodlings = jsonList.map((line) => DoodlingModel.fromJson(line)).toList();
+    final List<DoodlingModel> doodlings = LineSplitter.split(assetContent).map((line) {
+      final jsonMap = json.decode(line);
+      return DoodlingModel.fromJson(jsonMap);
+    }).toList();
 
     return doodlings;
   } on FileSystemException catch (e) {

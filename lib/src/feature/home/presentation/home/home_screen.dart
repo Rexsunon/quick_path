@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,6 +16,11 @@ class HomeScreen extends StatefulHookConsumerWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   List<DoodlingModel> doodlings = [];
+
+  void randomlySelectDoodling() {
+    doodlings.shuffle();
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -50,19 +57,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       body: Column(
         children: [
           // canvas
-          Container(
+          SizedBox(
             height: context.height - context.padding.top - AppBar().preferredSize.height - context.heightScale(scale: .1),
-            color: context.theme.primaryColor,
-            child: const CanvasScreen(),
+            // color: context.theme.primaryColor,
+            child: doodlings.isNotEmpty ? CanvasScreen(doodlingModel: doodlings.first) : const SizedBox(),
           ),
           // generate new path button
           Container(
             width: context.width,
             height: context.heightScale(scale: .1),
             padding: const EdgeInsets.all(20),
-            color: Colors.red,
+            // color: Colors.red,
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () => randomlySelectDoodling(),
               icon: const Icon(Icons.draw_rounded),
               label: Text(context.l10n!.drawPath),
             ),
