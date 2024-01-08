@@ -20,10 +20,28 @@ class _CanvasScreenState extends State<CanvasScreen> with SingleTickerProviderSt
   void initState() {
     super.initState();
 
-    animationController = AnimationController(duration: const Duration(milliseconds: 800), vsync: this,)..repeat();
+    animationController = AnimationController(duration: const Duration(milliseconds: 800), vsync: this,)..forward();
     animation = Tween<double>(begin: 0, end: 1).animate(animationController);
 
-    animationController.addListener(() => setState(() {}));
+    animationController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant CanvasScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.doodlingModel != oldWidget.doodlingModel) {
+      animationController.reset();
+      animationController.forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -54,9 +72,9 @@ class QuickPathCanvas extends CustomPainter {
         final offset = Offset(xPoints[i].toDouble(), yPoints[i].toDouble());
         path.lineTo(offset.dx, offset.dy);
       }
-      canvas.drawPath(path, paint);
+      // canvas.drawPath(path, paint);
 
-      // animatePath(path, paint, canvas, animationValue);
+      animatePath(path, paint, canvas, animationValue);
     }
 
   }
@@ -67,7 +85,7 @@ class QuickPathCanvas extends CustomPainter {
     for (PathMetric metric in pathMetrics) {
       final extractedPath = metric.extractPath(
         .0,
-        pathMetrics.length * animationValue,
+        metric.length * animationValue,
       );
       canvas.drawPath(extractedPath, paint);
     }
